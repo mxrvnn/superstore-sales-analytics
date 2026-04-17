@@ -1,0 +1,7 @@
+superstore-env/
+.env
+*.pkl
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+Projects/Test/
