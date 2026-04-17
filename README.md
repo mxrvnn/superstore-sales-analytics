@@ -1,4 +1,4 @@
-# 📊 Superstore Sales Analytics
+# Superstore Sales Analytics
 
 An end-to-end retail ML pipeline, from raw PostgreSQL data through 
 to a live Streamlit app predicting order profitability in real time.
@@ -7,7 +7,7 @@ to a live Streamlit app predicting order profitability in real time.
 
 ---
 
-## ✨ Technologies
+## Technologies
 
 - Python · Pandas · NumPy
 - PostgreSQL · SQLAlchemy
@@ -17,7 +17,7 @@ to a live Streamlit app predicting order profitability in real time.
 
 ---
 
-## 🚀 Features
+## Features
 
 - End-to-end data pipeline from raw CSV → PostgreSQL → ML model → live app
 - EDA across 9,994 transactions uncovering profit drivers and loss patterns
@@ -27,7 +27,7 @@ to a live Streamlit app predicting order profitability in real time.
 
 ---
 
-## 📊 Model Comparison
+## Model Comparison
 
 | Metric | Random Forest | XGBoost | Improvement |
 |--------|--------------|---------|-------------|
@@ -39,7 +39,7 @@ XGBoost selected as the production model based on performance across all metrics
 
 ---
 
-## 🎯 Key Findings
+## Key Findings
 
 - Discount rate is the second strongest profit predictor after sales volume, consistent across both models
 - Sub-category copiers showed a distinct profit profile misattributed to sales volume by Random Forest
@@ -48,7 +48,7 @@ XGBoost selected as the production model based on performance across all metrics
 
 ---
 
-## 🔄 The Process
+## The Process
 
 Started by loading the raw Superstore CSV into PostgreSQL using SQLAlchemy. 
 A data cleaning script standardised column names, fixed data types, and 
@@ -66,7 +66,7 @@ rate as the dominant profit driver at the transaction level.
 
 ---
 
-## 💡 What I Learned
+## What I Learned
 
 **End-to-end thinking:** Every stage of the pipeline, from SQL table design 
 to Streamlit deployment, affects every other stage. Building it all forced 
@@ -86,7 +86,7 @@ rebuilt from scratch by anyone.
 
 ---
 
-## 🔧 How Can It Be Improved?
+## How Can It Be Improved?
 
 - Log transformation on profit to reduce outlier impact on training
 - Separate model for high-value outlier transactions
@@ -96,7 +96,7 @@ rebuilt from scratch by anyone.
 
 ---
 
-## ⚙️ Setup
+## Setup
 
 1. Clone the repo
 2. Create a virtual environment — `python -m venv venv`
