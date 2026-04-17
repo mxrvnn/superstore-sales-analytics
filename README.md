@@ -18,16 +18,6 @@ profitability in real time.
 
 ---
 
-## Project Status
-
-- [x] Exploratory Data Analysis
-- [x] Random Forest — R² 0.68, MAE $28.80
-- [ ] XGBoost + model comparison
-- [ ] SHAP explainability
-- [ ] Streamlit deployment
-
----
-
 ## Features
 
 - **Data Pipeline:** Raw CSV loaded into PostgreSQL, cleaned and 
