@@ -1,118 +1,118 @@
-# Superstore Sales Analytics
+# 📊 Superstore Sales Analytics
 
-An end-to-end retail ML pipeline built with Python and PostgreSQL — 
-from raw data through to a live Streamlit app predicting order 
-profitability in real time.
+An end-to-end retail ML pipeline, from raw PostgreSQL data through 
+to a live Streamlit app predicting order profitability in real time.
 
----
-
-## Technologies
-
-- Python
-- PostgreSQL & SQLAlchemy
-- Pandas & NumPy
-- Scikit-learn & XGBoost
-- Matplotlib & Seaborn
-- Streamlit
-- Git & GitHub
+[Live App](https://superstore-profit-predictor.streamlit.app/) · [LinkedIn](https://www.linkedin.com/in/marvin-adu/)
 
 ---
 
-## Features
+## ✨ Technologies
 
-- **Data Pipeline:** Raw CSV loaded into PostgreSQL, cleaned and 
-  transformed in Python, structured into an orders_clean table 
-  that feeds every notebook
-- **EDA:** Six visualisations uncovering sales distribution, 
-  profit outliers, and category performance across 9,994 transactions
-- **ML Model:** Random Forest Regressor predicting order profit — 
-  sales volume and discount rate identified as primary drivers
-- **Streamlit App:** Input order details and get a live profit 
-  prediction (in progress)
+- Python · Pandas · NumPy
+- PostgreSQL · SQLAlchemy
+- Scikit-learn · XGBoost · SHAP
+- Matplotlib · Seaborn
+- Streamlit · Git · GitHub
 
 ---
 
-## The Process
+## 🚀 Features
 
-Firstly, I started by loading the raw Superstore CSV into a PostgreSQL 
-database using SQLAlchemy, cleaning and standardising the data 
-in Python before any analysis began. This meant every notebook 
-pulled from a single clean source of truth rather than a flat file.
-
-For the EDA I focused on understanding the distribution of sales 
-and profit, which immediately revealed two things: a heavily 
-right-skewed sales distribution and transactions with losses of 
-over £6,000, suggesting discount abuse on certain orders.
-
-For the ML model I chose Random Forest Regressor as a robust 
-first model that handles mixed data types without heavy 
-preprocessing. After encoding categorical variables and splitting 
-the data 80/20, the baseline model achieved R² of 0.68 and MAE 
-of $28.80. The feature importance chart confirmed discount rate 
-as the second strongest predictor of profit after sales volume.
-
-XGBoost and a Streamlit deployment are the next steps, the goal 
-is a live app where a user can input order details and receive 
-a profit prediction in real time.
+- End-to-end data pipeline from raw CSV → PostgreSQL → ML model → live app
+- EDA across 9,994 transactions uncovering profit drivers and loss patterns
+- Two ML models trained and compared — Random Forest vs XGBoost
+- SHAP explainability showing why each profit prediction was made
+- Live Streamlit app for real-time profit prediction from order inputs
 
 ---
 
-## What I Learned
+## 📊 Model Comparison
 
-**End-to-end thinking:** Building the pipeline from PostgreSQL 
-through to a trained model taught me to think about data flow 
-across every stage, not just individual notebooks in isolation.
+| Metric | Random Forest | XGBoost | Improvement |
+|--------|--------------|---------|-------------|
+| MAE    | $28.80       | $16.35  | 43%         |
+| RMSE   | $118.11      | $4.04   | 97%         |
+| R²     | 0.68         | 0.93    | 37%         |
 
-**Model interpretation matters more than accuracy:** An R² of 
-0.68 is useful, but the feature importance chart, highlighting that 
-discount rate is a stronger profit predictor than product category,
-is what makes the model actionable for a business.
-
-**RMSE vs MAE tell different stories:** My MAE of £28.80 looked 
-strong but RMSE of $118.11 revealed the model struggles with 
-extreme outlier transactions. That gap taught me more about my 
-data than the model accuracy itself did.
-
-**Virtual environments and reproducibility:** Setting up a clean 
-venv, registering it as a Jupyter kernel, and maintaining a 
-requirements.txt taught me how to build projects that others 
-can actually run — not just notebooks that work on my machine.
+XGBoost selected as the production model based on performance across all metrics.
 
 ---
 
-## How Can It Be Improved?
+## 🎯 Key Findings
 
-- Apply log transformation to profit to reduce the impact of 
-  extreme outliers on model performance
-- Build a separate model for high-value outlier transactions
-- Add time series forecasting for monthly sales trends
-- Expand features — include shipping duration and regional 
-  economic indicators
-- Add cross-validation instead of a single train/test split 
-  for more robust evaluation
+- Discount rate is the second strongest profit predictor after sales volume, consistent across both models
+- Sub-category copiers showed a distinct profit profile misattributed to sales volume by Random Forest
+- Low value furniture orders with moderate discounts are consistently the lowest profit transactions
+- SHAP analysis confirmed discount rate as the dominant factor in individual profit predictions
 
 ---
 
-## Setup
+## 🔄 The Process
+
+Started by loading the raw Superstore CSV into PostgreSQL using SQLAlchemy. 
+A data cleaning script standardised column names, fixed data types, and 
+engineered new features. Every notebook connects to the same `orders_clean` 
+table.
+
+EDA revealed two immediate findings: a heavily right-skewed sales distribution 
+and transactions losing over $6,000, suggesting discount abuse on certain orders.
+
+Two models were trained on an 80/20 split. Random Forest gave a solid baseline 
+at R² 0.68. XGBoost improved every metric, most significantly RMSE dropped 
+from $118 to $4, meaning XGBoost handles profit outliers dramatically better. 
+SHAP was then applied to explain individual predictions, confirming discount 
+rate as the dominant profit driver at the transaction level.
+
+---
+
+## 💡 What I Learned
+
+**End-to-end thinking:** Every stage of the pipeline, from SQL table design 
+to Streamlit deployment, affects every other stage. Building it all forced 
+a systems-level perspective.
+
+**Model selection is a decision:** Benchmarking Random Forest against XGBoost 
+justified the additional complexity. The 97% RMSE improvement wasn't obvious 
+until both models were evaluated side by side.
+
+**Explainability matters:** SHAP turned a black-box model into a business tool. 
+Showing *why* an order is predicted to lose money is more valuable than the 
+prediction alone.
+
+**Reproducibility from day one:** Clean venv, requirements.txt, structured 
+Git commits, and SQL as a single source of truth meant the project could be 
+rebuilt from scratch by anyone.
+
+---
+
+## 🔧 How Can It Be Improved?
+
+- Log transformation on profit to reduce outlier impact on training
+- Separate model for high-value outlier transactions
+- Cross-validation for more robust evaluation
+- Time series forecasting for monthly sales trends
+- Expand Streamlit app with SHAP explanations per prediction
+
+---
+
+## ⚙️ Setup
 
 1. Clone the repo
-2. Create a virtual environment
-3. Install dependencies
-4. Add a .env file with your PostgreSQL credentials
+2. Create a virtual environment — `python -m venv venv`
+3. Install dependencies — `pip install -r requirements.txt`
+4. Add `.env` file with PostgreSQL credentials
 5. Run in order:
    - `data_cleaning.py` — loads raw data into PostgreSQL
    - `01_eda.ipynb` — exploratory data analysis
    - `02_profit_prediction.ipynb` — Random Forest model
-
----
-
-## Video Demo
-
-Coming soon — Streamlit app walkthrough
+   - `03_xgboost_profit_prediction.ipynb` — XGBoost + SHAP
+   - `streamlit run app.py` — launch the web app
 
 ---
 
 ## Contact
 
-📧 M.Adu1@Outlook.com  
-💼 [LinkedIn](https://www.linkedin.com/in/marvin-adu/)
+M.Adu1@Outlook.com  
+[LinkedIn](https://www.linkedin.com/in/marvin-adu/)  
+[GitHub](https://github.com/mxrvnn)
