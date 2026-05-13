@@ -9,3 +9,4 @@ sqlalchemy
 psycopg2-binary
 python-dotenv
 requests
+xgboost==3.2.0
